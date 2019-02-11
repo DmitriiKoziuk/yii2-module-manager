@@ -1,10 +1,10 @@
 <?php
 namespace DmitriiKoziuk\yii2ModuleManager;
 
-use yii\base\Application as BaseApp;
-use yii\web\Application as WebApp;
-use yii\bootstrap\Nav;
 use yii\base\Event;
+use yii\bootstrap\Nav;
+use yii\web\Application as WebApp;
+use yii\base\Application as BaseApp;
 use DmitriiKoziuk\yii2ModuleManager\services\ModuleService;
 
 final class ModuleManager extends \yii\base\Module
