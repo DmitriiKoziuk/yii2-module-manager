@@ -57,7 +57,7 @@ final class ModuleManager extends \yii\base\Module
 
     private function _subscribeToEvents($app)
     {
-        if ($app instanceof WebApp && $app->id == $this->backendAppId) {
+        if ($app instanceof WebApp && $app->id == $this->backendAppId && ! $app->getUser()->isGuest) {
             Event::on(Nav::class, Nav::EVENT_INIT, function ($event) {
                 /** @var ModuleService $moduleService */
                 $moduleService = $this->diContainer->get(ModuleService::class);
