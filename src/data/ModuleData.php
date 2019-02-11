@@ -17,16 +17,6 @@ class ModuleData
 
     public function getId(): string
     {
-        return $this->_module::getId();
-    }
-
-    public function getRequiredModules(): array
-    {
-        return $this->_module::getRequiredModules();
-    }
-
-    public function runModule(): void
-    {
-
+        return $this->_module->getId();
     }
 }
