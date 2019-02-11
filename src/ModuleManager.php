@@ -1,10 +1,10 @@
 <?php
 namespace DmitriiKoziuk\yii2ModuleManager;
 
-use yii\base\Application as BaseApp;
-use yii\web\Application as WebApp;
-use yii\bootstrap\Nav;
 use yii\base\Event;
+use yii\bootstrap\Nav;
+use yii\web\Application as WebApp;
+use yii\base\Application as BaseApp;
 use DmitriiKoziuk\yii2ModuleManager\services\ModuleService;
 
 final class ModuleManager extends \yii\base\Module
@@ -28,15 +28,9 @@ final class ModuleManager extends \yii\base\Module
     {
         /** @var BaseApp $app */
         $app = $this->module;
-        $this->_initLocalProperties($app);
         $this->_registerTranslation($app);
         $this->_registerClassesToDIContainer($app);
         $this->_subscribeToEvents($app);
-    }
-
-    private function _initLocalProperties($app)
-    {
-
     }
 
     private function _registerTranslation($app)
@@ -57,7 +51,7 @@ final class ModuleManager extends \yii\base\Module
 
     private function _subscribeToEvents($app)
     {
-        if ($app instanceof WebApp && $app->id == $this->backendAppId) {
+        if ($app instanceof WebApp && $app->id == $this->backendAppId && ! $app->getUser()->isGuest) {
             Event::on(Nav::class, Nav::EVENT_INIT, function ($event) {
                 /** @var ModuleService $moduleService */
                 $moduleService = $this->diContainer->get(ModuleService::class);
