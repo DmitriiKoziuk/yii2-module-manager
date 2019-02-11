@@ -16,7 +16,7 @@ php composer.phar require dmitriikoziuk/yii2-module-manager
 or add
 
 ```
-"dmitriikoziuk/yii2-module-manager": "dev-master"
+"dmitriikoziuk/yii2-module-manager": "^0.1"
 ```
 
 to the require section of your `composer.json` file.
