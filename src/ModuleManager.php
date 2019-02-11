@@ -28,15 +28,9 @@ final class ModuleManager extends \yii\base\Module
     {
         /** @var BaseApp $app */
         $app = $this->module;
-        $this->_initLocalProperties($app);
         $this->_registerTranslation($app);
         $this->_registerClassesToDIContainer($app);
         $this->_subscribeToEvents($app);
-    }
-
-    private function _initLocalProperties($app)
-    {
-
     }
 
     private function _registerTranslation($app)
