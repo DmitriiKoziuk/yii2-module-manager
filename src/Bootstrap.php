@@ -3,6 +3,7 @@ namespace DmitriiKoziuk\yii2ModuleManager;
 
 use Yii;
 use yii\base\BootstrapInterface;
+use DmitriiKoziuk\yii2ModuleManager\services\ModuleInitService;
 
 final class Bootstrap implements BootstrapInterface
 {
@@ -11,10 +12,11 @@ final class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $app->setModule(ModuleManager::ID, [
-            'class' => ModuleManager::class,
-            'diContainer' => Yii::$container,
-        ]);
-        $app->getModule(ModuleManager::ID);
+        ModuleInitService::registerModule(ModuleManager::class, function () {
+            return [
+                'class' => ModuleManager::class,
+                'diContainer' => Yii::$container,
+            ];
+        });
     }
 }
