@@ -5,9 +5,10 @@ use yii\base\Event;
 use yii\bootstrap\Nav;
 use yii\web\Application as WebApp;
 use yii\base\Application as BaseApp;
+use DmitriiKoziuk\yii2ModuleManager\interfaces\ModuleInterface;
 use DmitriiKoziuk\yii2ModuleManager\services\ModuleService;
 
-final class ModuleManager extends \yii\base\Module
+final class ModuleManager extends \yii\base\Module implements ModuleInterface
 {
     const ID = 'dk-module-manager';
 
@@ -31,6 +32,21 @@ final class ModuleManager extends \yii\base\Module
         $this->_registerTranslation($app);
         $this->_registerClassesToDIContainer($app);
         $this->_subscribeToEvents($app);
+    }
+
+    public static function getId(): string
+    {
+        return self::ID;
+    }
+
+    public function getBackendMenuItems(): array
+    {
+        return [];
+    }
+
+    public static function requireOtherModulesToBeActive(): array
+    {
+        return [];
     }
 
     private function _registerTranslation($app)
