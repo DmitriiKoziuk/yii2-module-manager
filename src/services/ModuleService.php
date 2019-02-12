@@ -6,37 +6,29 @@ use DmitriiKoziuk\yii2ModuleManager\interfaces\ModuleInterface;
 
 class ModuleService
 {
-    private $_app;
-
     /**
-     * @var ModuleInterface[]
+     * @var Application
      */
-    private $_modules = [];
+    public $_app;
 
     public function __construct(Application $app)
     {
         $this->_app = $app;
     }
 
-    public function registerModule(ModuleInterface $module)
-    {
-        $this->_modules[ $module->getId() ] = $module;
-    }
-
-    /**
-     * @return ModuleInterface[]
-     */
-    public function getModules(): array
-    {
-        return $this->_modules;
-    }
-
     public function getModulesMenuItems(): array
     {
-        $menuItems = ['label' => 'Modules', 'items' => []];
-        foreach ($this->_modules as $module) {
-            $menuItems['items'][] = $module->getBackendMenuItems();
+        $items = [];
+        foreach ($this->_app->loadedModules as $module) {
+            if (
+                $module instanceof ModuleInterface &&
+                ! empty($module->getBackendMenuItems())
+            ) {
+                $moduleItems = $module->getBackendMenuItems();
+                $items[ $moduleItems['label'] ] = $moduleItems;
+            }
         }
-        return $menuItems;
+        ksort($items);
+        return $menu = ['label' => 'Modules', 'items' => $items];
     }
 }

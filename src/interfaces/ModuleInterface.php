@@ -3,6 +3,18 @@ namespace DmitriiKoziuk\yii2ModuleManager\interfaces;
 
 interface ModuleInterface
 {
-    public function getId(): string;
+    /**
+     * @return string
+     */
+    public static function getId(): string;
+
+    /**
+     * @return array
+     */
     public function getBackendMenuItems(): array;
+
+    /**
+     * @return \yii\base\Module[]
+     */
+    public static function requireOtherModulesToBeActive(): array;
 }
