@@ -23,7 +23,7 @@ final class ModuleManager extends \yii\base\Module implements ModuleInterface
      * Overwrite this param if you backend app id is different from default.
      * @var string
      */
-    public $backendAppId = 'app-backend';
+    public $backendAppId = YII_ENV_TEST ? 'app-backend-tests' : 'app-backend';
 
     public function init()
     {
