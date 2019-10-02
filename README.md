@@ -12,11 +12,3 @@ Either run
 ```
 php composer.phar require dmitriikoziuk/yii2-module-manager
 ```
-
-or add
-
-```
-"dmitriikoziuk/yii2-module-manager": "~0.2"
-```
-
-to the require section of your `composer.json` file.
