@@ -5,6 +5,7 @@ use yii\base\Event;
 use yii\bootstrap\Nav;
 use yii\web\Application as WebApp;
 use yii\base\Application as BaseApp;
+use yii\console\Application as ConsoleApp;
 use DmitriiKoziuk\yii2ModuleManager\interfaces\ModuleInterface;
 use DmitriiKoziuk\yii2ModuleManager\services\ModuleService;
 
@@ -29,6 +30,7 @@ final class ModuleManager extends \yii\base\Module implements ModuleInterface
     {
         /** @var BaseApp $app */
         $app = $this->module;
+        $this->initLocalProperties($app);
         $this->_registerTranslation($app);
         $this->_registerClassesToDIContainer($app);
         $this->_subscribeToEvents($app);
@@ -47,6 +49,16 @@ final class ModuleManager extends \yii\base\Module implements ModuleInterface
     public static function requireOtherModulesToBeActive(): array
     {
         return [];
+    }
+
+    private function initLocalProperties($app)
+    {
+        if ($app instanceof ConsoleApp) {
+            $app->controllerMap['migrate'] = [
+                'class' => 'yii\console\controllers\MigrateController',
+                'migrationNamespaces' => [],
+            ];
+        }
     }
 
     private function _registerTranslation($app)
